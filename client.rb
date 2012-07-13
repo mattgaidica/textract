@@ -32,6 +32,37 @@ def putss message
   newline
 end
 
+# primary methods
+def get_emails
+  putss indent "--> Getting emails".yellow
+  puts JSON.pretty_generate(@textract.emails).green
+  newline
+end
+
+def get_people
+  putss indent "--> Getting people".yellow
+  puts JSON.pretty_generate(@textract.people).green
+  newline
+end
+
+def get_peoples_emails
+  putss indent "--> Getting people's emails".yellow
+  puts JSON.pretty_generate(@textract.peoples_emails).green
+  newline
+end
+
+def get_phone_numbers
+  putss indent "--> Getting phone numbers".yellow
+  puts JSON.pretty_generate(@textract.phones).green
+  newline
+end
+
+def get_isbns
+  putss indent "--> Getting ISBN's".yellow
+  puts JSON.pretty_generate(@textract.isbns([], true)).green
+  newline
+end
+
 # start client
 clear
 putss "Thanks for using textract..."
@@ -42,10 +73,8 @@ putss indent "--> Loading sample file".yellow
 file = File.open('sample.txt')
 text = file.read.force_encoding('UTF-8')
 
-
 putss indent "--> Creating textract object".yellow
-textract = Textract.new(text)
-
+@textract = Textract.new(text)
 
 newline
 putss "Processing..."
@@ -53,25 +82,17 @@ newline
 pause
 
 # process
-putss indent "--> Getting emails".yellow
-puts JSON.pretty_generate(textract.emails).green
-newline
-
-putss indent "--> Getting people".yellow
-puts JSON.pretty_generate(textract.people).green
-newline
-
-putss indent "--> Getting people's emails".yellow
-puts JSON.pretty_generate(textract.peoples_emails).green
-newline
-
-putss indent "--> Getting phone numbers".yellow
-puts JSON.pretty_generate(textract.phones).green
-newline
-
-putss indent "--> Getting ISBN's".yellow
-puts JSON.pretty_generate(textract.isbns).green
-newline
+if ARGV.empty?
+  get_emails
+  get_people
+  get_peoples_emails
+  get_phone_numbers
+  get_isbns
+else
+  ARGV.each do |method|
+    send method
+  end
+end
 
 # done
 putss "Complete!"

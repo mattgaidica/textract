@@ -120,9 +120,11 @@ class Textract
     assignments
   end
 
-  def isbns
+  def isbns negate=nil, phones=false
+    negate = self.phones if phones
     isbns = []
     self.text.scan(/(?<isbn>(\d[- ]?){9,12}([0-9xX]))/).each {|x| isbns << x[0]}
+    isbns = isbns.select{|x| !negate.include? x} if negate.is_a? Array
     isbns
   end
 
