@@ -2,7 +2,7 @@ require 'stanford-core-nlp'
 require 'amatch'
 include Amatch
 
-class Extractor
+class Textractor
   attr_accessor :text
   def initialize text
     @text = text.force_encoding('UTF-8')
