@@ -8,20 +8,6 @@ class Textract
     @text = text.force_encoding('UTF-8')
   end
 
-  def all
-    # since telephone regex is more strict, remove duplicates
-    books = self.books
-    # no need, but for the future string.scan(/\d+/).join to remove all but numbers
-    phones = self.phones
-    books.delete_if {|x| phones.include?(x)}
-
-    {
-      :books => books,
-      :phones => phones,
-      :emails => self.emails
-    }
-  end
-
   def people
     emails = self.emails
     pipeline = StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :lemma, :parse, :ner, :dcoref)
