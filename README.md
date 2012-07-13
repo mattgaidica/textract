@@ -26,13 +26,13 @@ I ran into some issues getting the Stanford Core NLP library working, but they w
 * [amatch](https://github.com/flori/amatch)
 
 ## Using the client
-The included `client.rb` file is a simple way to test the class using the `simple.txt` example. To run all of the methods, simple use the following in the terminal:
+The included `client.rb` file is a simple way to test the class using the `simple.txt` file as the text source. To run all of the methods, simply use the following in the terminal.
 
 ```shell
 ruby client.rb
 ```
 
-This should provide you with a nice color-enhanced view of the core methods of the textract class. You can explicitly call any of the methods through the client by specifying the method name within the terminal.
+This should provide you with a nice color-enhanced view of the core methods of the textract class. You can explicitly call any of the methods through the client by specifying the method name within the command.
 
 ```shell
 ruby client.rb get_emails get_people
